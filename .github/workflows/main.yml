@@ -9,5 +9,7 @@ jobs:
           path: "${{ github.repository }}"
       - uses: gofrolist/molecule-action@v2
         with:
+          molecule_options: -v
+          molecule_command: test
           molecule_args: --driver-name podman
           molecule_working_dir: '/home/runner/work/ansible-kube/ansible-kube/asg1612/ansible-kube' 
