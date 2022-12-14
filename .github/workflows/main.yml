@@ -10,4 +10,4 @@ jobs:
       - uses: gofrolist/molecule-action@v2
         with:
           molecule_args: --driver-name podman
-          molecule_working_dir: '${GITHUB_REPOSITORY}' 
+          molecule_working_dir: '/home/runner/work/ansible-kube/ansible-kube/asg1612/ansible-kube' 
