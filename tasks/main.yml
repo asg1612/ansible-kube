@@ -1,7 +1,39 @@
 ---
 # tasks file for kube
-
-- name: install containerd
-  apt:
+- name: install packages
+  community.general.apk:
     name: containerd
     state: present
+    update_cache: true
+  loop:
+    - containerd
+    - cni-plugin-flannel
+    - cni-plugins
+    - flannel
+    - flannel-contrib-cni
+    - kubelet
+    - kubeadm
+    - kubectl
+    - uuidgen
+    - nfs-utils
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: k8s.conf
+    dest:  /etc/modules-load.d/
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name: config br_netfilter
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: '1'
+    sysctl_set: yes
+    reload: yes
+  loop:
+    - net.bridge.bridge-nf-call-iptables
+    - net.bridge.bridge-nf-call-ip6tables
+    - net.ipv4.ip_forward
+  
