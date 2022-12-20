@@ -1,8 +1,17 @@
 ---
 # tasks file for kube
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: repositories
+    dest:  /etc/apk/
+    owner: root
+    group: root
+    mode: '0644'
+
+
 - name: install packages
   community.general.apk:
-    name: containerd
+    name: "{{ item }}"
     state: present
     update_cache: true
   loop:
