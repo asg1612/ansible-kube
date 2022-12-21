@@ -15,7 +15,7 @@
     state: present
     update_cache: true
   loop:
-    - containerd
+    - docker
     - cni-plugin-flannel
     - cni-plugins
     - flannel
