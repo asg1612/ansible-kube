@@ -10,7 +10,7 @@
 
 
 - name: install packages
-  community.general.apt:
+  community.general.apk:
     name: "{{ item }}"
     state: present
     update_cache: true
